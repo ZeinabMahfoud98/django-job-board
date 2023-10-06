@@ -2,6 +2,12 @@ from django.db import models
 
 # Create your models here.
 
+class Category(models.Model):
+    name=models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.name
+
 class Job(models.Model):
     FULL_TIME="full time"
     PART_TIME="part time"
@@ -18,6 +24,7 @@ class Job(models.Model):
     salary=models.IntegerField(default=0)
     
     experience=models.IntegerField(default=1)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='rel_category')
 
     def __str__(self) -> str:
         return self.title
